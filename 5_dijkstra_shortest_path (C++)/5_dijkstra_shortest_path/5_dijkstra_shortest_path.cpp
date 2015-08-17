@@ -11,8 +11,8 @@
 //# include<map>      // =Python dictionary
 
 using namespace std;   // studio -> C++ standard library
-//# define MAX 200       // # of vertices in Graph
-# define MAX 5
+# define MAX 200       // # of vertices in Graph
+//# define MAX 5
 # define MAX_DISTANCE 1000000 // maximum distance (will bring concenience!!!)
 
 /****************************************************************************************/
@@ -173,7 +173,7 @@ bool is_in_Vector(int label, vector<int> &V)
 int main()
 {
 	initGraph();
-	readGraph("dijkstraData_test_2.txt");
+	readGraph("dijkstraData.txt");
 	
 	/*
 	// check case for reading Graph! - v1.0
@@ -251,8 +251,8 @@ int main()
 		delete_in_Vector(min_next_node, V_X);
 	}
 
-	//cout<<A[6]<<','<<A[36]<<','<<A[58]<<','<<A[81]<<','<<A[98]<<','<<A[114]<<','<<A[132]<<','<<A[164]<<','<<A[187]<<','<<A[196]<<'\n';
-	cout<<A[0]<<','<<A[1]<<','<<A[2]<<','<<A[3]<<','<<A[4]<<'\n';
+	cout<<A[6]<<','<<A[36]<<','<<A[58]<<','<<A[81]<<','<<A[98]<<','<<A[114]<<','<<A[132]<<','<<A[164]<<','<<A[187]<<','<<A[196]<<'\n';
+	//cout<<A[0]<<','<<A[1]<<','<<A[2]<<','<<A[3]<<','<<A[4]<<'\n';
 
 	return 0;
 }
