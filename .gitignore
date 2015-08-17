@@ -13,6 +13,9 @@
 *.htm
 *.dep
 *.idb
+*.rc
+*.aps
+*.h
 
 # My configurations:
 0_github_solution/
