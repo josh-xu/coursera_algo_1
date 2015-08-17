@@ -12,7 +12,7 @@
 
 using namespace std;   // studio -> C++ standard library
 //# define MAX 200       // # of vertices in Graph
-# define MAX 4
+# define MAX 5
 # define MAX_DISTANCE 1000000 // maximum distance (will bring concenience!!!)
 
 /****************************************************************************************/
@@ -22,8 +22,6 @@ using namespace std;   // studio -> C++ standard library
 struct node
 {
     int label;
-    bool visited;
-
 	// self -> next_node[5] = edge_length[5]
     vector<int> next_node;    // self -> next_node (undirected)
 	vector<int> edge_length;  // length of edge from self -> next_node
@@ -53,7 +51,6 @@ void initGraph()
 	for(int i = 0; i < MAX; i++)
 	{
 		Graph[i].label = i + 1; // label from 1 to 200, but index from 0 to 199
-		Graph[i].visited = false;
 		V_X.push_back(i + 1);   //1 to 200
 	}
 	X.push_back(1); //using 1 (the first vertex) as the source vertex
@@ -75,7 +72,7 @@ void readGraph(char *filename) // must use *char, string class cannot be used...
 	ifile.unsetf(ios::skipws); // do not skip any ' ' & '\t' & '\n'
 	// direct load int -> should skip ' ' & '\t' & '\n'!!!
 
-	int temp_int, label;
+	int temp_int, label, index;
 	char temp_char;
 	while(true)
 	{
@@ -107,14 +104,14 @@ void readGraph(char *filename) // must use *char, string class cannot be used...
 		{
 			// temp_char will be '\t'; label will be the 1st i.e. -> self_label
 			//cout<<"***"<<label<<'\n';
-			label--; // label from 1 to 200, but index from 0 to 199
+			index = label - 1; // label from 1 to 200, but index from 0 to 199
 			while(true) // if exist sth to read to temp_int & temp_char
 			{
 				ifile>>temp_int>>temp_char; // temp_char will be ',' or '\t'
 				//cout<<temp_int<<' ';
 				//cout<<temp_char<<'.'<<'\n';
-				if(temp_char == ',') Graph[label].next_node.push_back(temp_int); // should not use ",", it's array!!! -> use ',' instead!!! (different with Python)
-				if(temp_char == '\t') Graph[label].edge_length.push_back(temp_int);
+				if(temp_char == ',') Graph[index].next_node.push_back(temp_int); // should not use ","! it's array!!! -> use ',' instead!!! (different with Python)
+				if(temp_char == '\t') Graph[index].edge_length.push_back(temp_int);
 				
 				// do a check (test) -> whether a line is over!!!
 				ifile>>temp_char;
@@ -176,7 +173,7 @@ bool is_in_Vector(int label, vector<int> &V)
 int main()
 {
 	initGraph();
-	readGraph("dijkstraData_test.txt");
+	readGraph("dijkstraData_test_2.txt");
 	
 	/*
 	// check case for reading Graph! - v1.0
@@ -222,13 +219,13 @@ int main()
 	}
 	*/
 	
-	int min_path, min_next_node, greedy_criterion;
+	int min_path_length, min_next_node, greedy_criterion;
 	vector<int> next_node, edge_length;
 
 	// Graph[MAX] & A[MAX] -> have problem with index and label
 	while(! V_X.empty())
 	{
-		min_path = MAX_DISTANCE; // init min
+		min_path_length = MAX_DISTANCE; // init min
 		for(unsigned int i = 0; i < X.size(); i++)
 		{
 			next_node = Graph[i].next_node;     // a vector
@@ -241,20 +238,21 @@ int main()
 				{
 					// A[Graph[i].label - 1] to access A[]!
 					greedy_criterion = A[Graph[i].label - 1] + edge_length[j];
-					if(greedy_criterion < min_path)
+					if(greedy_criterion < min_path_length)
 					{
-						min_path = greedy_criterion;
+						min_path_length = greedy_criterion;
 						min_next_node = next_node[j];
 					}
 				}
 			}
 		}
-		A[min_next_node - 1] = min_path;
+		A[min_next_node - 1] = min_path_length;
 		X.push_back(min_next_node);
 		delete_in_Vector(min_next_node, V_X);
 	}
 
-	cout<<A[0]<<','<<A[1]<<','<<A[2]<<','<<A[3]<<'\n';
+	//cout<<A[6]<<','<<A[36]<<','<<A[58]<<','<<A[81]<<','<<A[98]<<','<<A[114]<<','<<A[132]<<','<<A[164]<<','<<A[187]<<','<<A[196]<<'\n';
+	cout<<A[0]<<','<<A[1]<<','<<A[2]<<','<<A[3]<<','<<A[4]<<'\n';
 
 	return 0;
 }
