@@ -6,10 +6,12 @@
 # include<iostream>   // in & out (stream)
 # include<fstream>    // file operation (stream)
 # include<vector>     // dynamic array
+//# include<cstring>  // deal with string array
+//# include<string>   // string
+//# include<map>      // =Python dictionary
 
 using namespace std;   // studio -> C++ standard library
 # define MAX 200       // # of vertices in Graph
-//# define MAX 5
 # define MAX_DISTANCE 1000000 // maximum distance (will bring concenience!!!)
 
 /****************************************************************************************/
@@ -48,7 +50,8 @@ void initGraph()
 	for(int i = 0; i < MAX; i++)
 	{
 		Graph[i].label = i + 1; // label from 1 to 200, but index from 0 to 199
-		V_X.push_back(i + 1);   //1 to 200
+		A[i] = MAX_DISTANCE;    // init to maximum (however, if v is not in X, it will not be used -> don't init still ok, but will take risks)
+		V_X.push_back(i + 1);   // 1 to 200
 	}
 	X.push_back(1); //using 1 (the first vertex) as the source vertex
 	delete_in_Vector(1, V_X);
@@ -121,26 +124,39 @@ int main()
 {
 	initGraph();
 	readGraph("dijkstraData.txt");
+	// using dijkstraData_test_2 -> find the bug~~~
+	// wrong: 0,100,300,200,150
+	// right: 0,100,300,151,150
 	
 	int min_path_length, min_next_node, greedy_criterion;
 	vector<int> next_node, edge_length;
 
 	// Graph[MAX] & A[MAX] -> have problem with index and label
+	/***************************/
+	// because it's undirected graph -> all node will get to each other -> but for directed graph => should set "dead" node to MAX_DISTANCE last)!!!
+	// => while end case will not be (! V_X.empty())!!! -> use a **bool** to check if there is "dead" node
+	// !!!(per iteration, if exist next_node then false; end of iteration, still not find next_node then true...)
+	/***************************/
 	while(! V_X.empty())
 	{
 		min_path_length = MAX_DISTANCE; // init min
 		for(unsigned int i = 0; i < X.size(); i++)
 		{
-			next_node = Graph[i].next_node;     // a vector
-			edge_length = Graph[i].edge_length; // a vector
+			/************************!!!!!!!!!!!!!!!!!!!!!!!!!*********************************/
+			/********************************FINAL DEBUG***************************************/
+			// not Graph[i]!!! -> Graph[X[i] - 1]!!!
+			// Graph[MAX] & A[MAX] -> have problem with index and label -> index != label...Orz... :-)~~~
+			next_node = Graph[X[i] - 1].next_node;     // a vector
+			edge_length = Graph[X[i] - 1].edge_length; // a vector
+			/************************!!!!!!!!!!!!!!!!!!!!!!!!!*********************************/
 			
 			// next_node.size() = edge_length.size()
 			for(unsigned int j = 0; j < next_node.size(); j++)
 			{
 				if(is_in_Vector(next_node[j], V_X))
 				{
-					// A[Graph[i].label - 1] to access A[]!
-					greedy_criterion = A[Graph[i].label - 1] + edge_length[j];
+					// A[Graph[X[i] - 1].label - 1] to access A[]!
+					greedy_criterion = A[Graph[X[i] - 1].label - 1] + edge_length[j];
 					if(greedy_criterion < min_path_length)
 					{
 						min_path_length = greedy_criterion;
@@ -155,7 +171,6 @@ int main()
 	}
 
 	cout<<A[6]<<','<<A[36]<<','<<A[58]<<','<<A[81]<<','<<A[98]<<','<<A[114]<<','<<A[132]<<','<<A[164]<<','<<A[187]<<','<<A[196]<<'\n';
-	//cout<<A[0]<<','<<A[1]<<','<<A[2]<<','<<A[3]<<','<<A[4]<<'\n';
 
 	return 0;
 }
