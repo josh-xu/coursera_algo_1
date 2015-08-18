@@ -128,7 +128,7 @@ int main()
 	// wrong: 0,100,300,200,150
 	// right: 0,100,300,151,150
 	
-	int min_path_length, min_next_node, greedy_criterion;
+	int min_path_length, min_next_node, greedy_score;
 	vector<int> next_node, edge_length;
 
 	// Graph[MAX] & A[MAX] -> have problem with index and label
@@ -156,10 +156,10 @@ int main()
 				if(is_in_Vector(next_node[j], V_X))
 				{
 					// A[Graph[X[i] - 1].label - 1] to access A[]!
-					greedy_criterion = A[Graph[X[i] - 1].label - 1] + edge_length[j];
-					if(greedy_criterion < min_path_length)
+					greedy_score = A[Graph[X[i] - 1].label - 1] + edge_length[j];
+					if(greedy_score < min_path_length)
 					{
-						min_path_length = greedy_criterion;
+						min_path_length = greedy_score;
 						min_next_node = next_node[j];
 					}
 				}
