@@ -11,6 +11,7 @@
 //# include<map>      // =Python dictionary
 
 using namespace std;   // studio -> C++ standard library
+
 # define MAX 200       // # of vertices in Graph
 # define MAX_DISTANCE 1000000 // maximum distance (will bring concenience!!!)
 
@@ -91,8 +92,9 @@ void readGraph(char *filename) // must use *char, string class cannot be used...
 				else ifile.seekg(-1, ios::cur); //!!!set pointer to the previous one!!!
 			}
 		}
-		if(ifile.eof() == true) break; // if the end of file, eof() = true
+		if(ifile.eof()) break; // if the end of file, eof() = true
 	}
+	
 	ifile.close();
 }
 

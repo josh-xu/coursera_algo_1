@@ -13,16 +13,12 @@
 *.htm
 *.dep
 *.idb
+*.pdb
 *.rc
 *.aps
 *.h
 
 # My configurations:
 0_github_solution/
-1_compute_inversion (C++)/
-1_compute_inversion (Python)/
-2_quick_sort (Python)/
-3_min_cut (Python)/
-4_compute_scc (Python)/
-5_dijkstra_shortest_path (Python)/
 5_dijkstra_shortest_path_heap (C++)/
+Python Version/
