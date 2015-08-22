@@ -62,7 +62,7 @@ int *merge_split_count(int *left, int *right, int len_l, int len_r)
 		{
 			if(left[i] <= right[j]) {temp_array[i + j] = left[i]; i++;} // do not count inversion
 			/*****************************Only do a slight change here!*******************************/
-			else {temp_array[i + j] = right[j]; j++; inversion_number += (len_l - i); /*cout<<inversion_number<<'\n';*/} //count inversion!!!
+			else {temp_array[i + j] = right[j]; j++; inversion_number += (len_l - i);} //count inversion!!!
 			/*****************************************************************************************/
 		}
 	}
@@ -95,31 +95,6 @@ int *mergeSort_Count(int *entire_array, int len)
 int main()
 {
 	readArray("IntegerArray.txt");
-
-	/*
-	for(int i = 0; i < MAX; i += 100) cout<<i<<"  "<<Array[i]<<'\n';
-	if(Array[21112] = 32601) cout<<"true"<<'\n';
-	*/
-
-	/*
-	int a[6] = {1, 3, 5, 7, 9, 14};
-	int b[4] = {0, 4, 6, 10};
-	int *c;
-	c = merge(a, b, 6, 4);
-	for(int i = 0; i < 10; i++) cout<<c[i]<<" ";
-	cout<<endl;
-	*/
-
-	/*
-	int a[9] = {3, 2, 5, 9, 14, 0, 16, 4, -1};
-	int *b;
-	b = mergeSort(a, 9);
-	for(int i = 0; i < 9; i++) cout<<b[i]<<" ";
-	cout<<'\n';
-	b = mergeSort(Array, MAX);
-	for(int i = 0; i < MAX; i += 100) cout<<i<<"  "<<b[i]<<'\n';
-	cout<<"99999"<<"  "<<b[99999]<<'\n';
-	*/
 
 	int *a;
 	a = mergeSort_Count(Array, MAX);
