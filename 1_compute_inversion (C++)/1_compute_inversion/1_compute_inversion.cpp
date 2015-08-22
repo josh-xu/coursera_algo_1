@@ -12,13 +12,14 @@ using namespace std;
 // Function Declaration
 
 void readArray(char *);
-int *merge(int *, int *, int, int);
-int *mergeSort(int *, int);
+int *merge_split_count(int *, int *, int, int);
+int *mergeSort_Count(int *, int);
 
 /****************************************************************************************/
 // Global Variable
 
 int Array[MAX];
+unsigned int inversion_number = 0; // must use unsigned value -> only int cannot represent 2407905288!!!
 
 /****************************************************************************************/
 // Function Definition
@@ -48,7 +49,7 @@ void readArray(char *filename)
 	ifile.close();
 }
 
-int *merge(int *left, int *right, int len_l, int len_r)
+int *merge_split_count(int *left, int *right, int len_l, int len_r)
 {
 	int i = 0, j = 0;
 	// the length of temp_array (len_l + len_r) is dynamic!!! must use new!!!
@@ -59,14 +60,17 @@ int *merge(int *left, int *right, int len_l, int len_r)
 		else if(j == len_r) {temp_array[i + j] = left[i]; i++;} // j = len_r - 1, and j++ to be len_r!
 		else
 		{
-			if(left[i] < right[j]) {temp_array[i + j] = left[i]; i++;}
-			else {temp_array[i + j] = right[j]; j++;}
+			if(left[i] <= right[j]) {temp_array[i + j] = left[i]; i++;} // do not count inversion
+			/*****************************Only do a slight change here!*******************************/
+			else {temp_array[i + j] = right[j]; j++; inversion_number += (len_l - i); /*cout<<inversion_number<<'\n';*/} //count inversion!!!
+			/*****************************************************************************************/
 		}
 	}
 	return temp_array;
 }
 
-int *mergeSort(int *entire_array, int len)
+// use recursion!
+int *mergeSort_Count(int *entire_array, int len)
 {
 	if(len == 1) return entire_array; //base case...
 
@@ -77,10 +81,12 @@ int *mergeSort(int *entire_array, int len)
 	int len_l = len / 2;
 	int len_r = len - len_l;
 
-	int *left_sorted = mergeSort(left, len_l);
-	int *right_sorted = mergeSort(right, len_r);
+	int *left_sorted = mergeSort_Count(left, len_l);
+	int *right_sorted = mergeSort_Count(right, len_r);
 
-	return merge(left_sorted, right_sorted, len_l, len_r);
+	// alreay computed inversion in left and right will not be count again -> only will do split_count!!!
+	// actually, left_count & right_count are consist of tiny case of split_count^_^~!!!
+	return merge_split_count(left_sorted, right_sorted, len_l, len_r);
 }
 
 /****************************************************************************************/
@@ -104,6 +110,7 @@ int main()
 	cout<<endl;
 	*/
 
+	/*
 	int a[9] = {3, 2, 5, 9, 14, 0, 16, 4, -1};
 	int *b;
 	b = mergeSort(a, 9);
@@ -112,6 +119,11 @@ int main()
 	b = mergeSort(Array, MAX);
 	for(int i = 0; i < MAX; i += 100) cout<<i<<"  "<<b[i]<<'\n';
 	cout<<"99999"<<"  "<<b[99999]<<'\n';
+	*/
+
+	int *a;
+	a = mergeSort_Count(Array, MAX);
+	cout<<inversion_number<<'\n';
 
 	return 0;
 }
