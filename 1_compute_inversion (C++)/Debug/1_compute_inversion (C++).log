@@ -1,0 +1,26 @@
+﻿Build started 2015/11/17 17:31:39.
+     1>Project "Z:\Open Courseware\coursera_algo_1\1_compute_inversion (C++)\1_compute_inversion (C++).vcxproj" on node 2 (build target(s)).
+     1>InitializeBuildStatus:
+         Creating "Debug\1_compute_inversion (C++).unsuccessfulbuild" because "AlwaysCreate" was specified.
+       ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt 1_compute_inversion.cpp
+         1_compute_inversion.cpp
+       ManifestResourceCompile:
+         All outputs are up-to-date.
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"Z:\Open Courseware\coursera_algo_1\1_compute_inversion (C++)\Debug\1_compute_inversion (C++).exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\1_compute_inversion (C++).exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"Z:\Open Courseware\coursera_algo_1\1_compute_inversion (C++)\Debug\1_compute_inversion (C++).pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"Z:\Open Courseware\coursera_algo_1\1_compute_inversion (C++)\Debug\1_compute_inversion (C++).lib" /MACHINE:X86 "Debug\1_compute_inversion (C++).exe.embed.manifest.res"
+         Debug\1_compute_inversion.obj
+       Manifest:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /out:"Debug\1_compute_inversion (C++).exe.embed.manifest" /manifest "Debug\1_compute_inversion (C++).exe.intermediate.manifest"
+         All outputs are up-to-date.
+       LinkEmbedManifest:
+         All outputs are up-to-date.
+         1_compute_inversion (C++).vcxproj -> Z:\Open Courseware\coursera_algo_1\1_compute_inversion (C++)\Debug\1_compute_inversion (C++).exe
+       FinalizeBuildStatus:
+         Deleting file "Debug\1_compute_inversion (C++).unsuccessfulbuild".
+         Touching "Debug\1_compute_inversion (C++).lastbuildstate".
+     1>Done Building Project "Z:\Open Courseware\coursera_algo_1\1_compute_inversion (C++)\1_compute_inversion (C++).vcxproj" (build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:00.80
